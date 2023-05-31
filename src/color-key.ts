@@ -33,8 +33,8 @@ export class ColorKey {
   }
 
   private calcRemoveTimeout(): void {
-    const animationSpeed = parseInt(getComputedStyle(document.body).getPropertyValue('--animation-speed'));
-    const animationDelay = parseInt(getComputedStyle(document.body).getPropertyValue('--animation-delay'));
+    const animationSpeed = +getComputedStyle(document.body).getPropertyValue('--animation-speed');
+    const animationDelay = +getComputedStyle(document.body).getPropertyValue('--animation-delay');
     this.removeTimeout = animationSpeed + animationDelay;
   }
 
