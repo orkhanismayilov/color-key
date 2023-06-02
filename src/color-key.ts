@@ -11,6 +11,9 @@ export class ColorKey {
   private tpl: HTMLTemplateElement | null = document.getElementById('circle-tpl') as HTMLTemplateElement;
   private removeTimeout: number = 0;
   private excludedKeys = ['Escape', 'F5', 'F11', 'F12'];
+  private container: HTMLElement | null = document.querySelector('main');
+  private tip: HTMLElement | null = document.querySelector('.tip');
+  private header: HTMLHeadElement | null = document.querySelector('header');
 
   constructor() {
     this.init();
@@ -45,8 +48,21 @@ export class ColorKey {
       e.preventDefault();
       e.stopPropagation();
 
+      this.hideTip();
+      this.minimizeHeader();
       this.drawCircle(getRandomHSL());
     });
+  }
+
+  private hideTip(): void {
+    if (this.tip) {
+      this.tip.remove();
+      this.tip = null;
+    }
+  }
+
+  private minimizeHeader(): void {
+    this.header?.classList.add('minimized');
   }
 
   drawCircle(color: string, position: Position = this.getRandomPosition()): void {
@@ -57,7 +73,7 @@ export class ColorKey {
     circle!.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     circle!.style.backgroundColor = color;
 
-    document.body.append(circle!);
+    this.container?.append(circle!);
     setTimeout(() => {
       circle!.remove();
     }, this.removeTimeout);

@@ -23,10 +23,81 @@ svg {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
   background-color: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 95%);
 }
 
 body {
   height: 100dvh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  transition: all 0.3s;
+  z-index: 99;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: hsla(0, 0%, 10%, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+  }
+
+  &.minimized {
+    padding: 1rem;
+
+    .logo-wrapper {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+
+  .logo-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    h1 {
+      transition: all 0.3s;
+    }
+
+    img {
+      width: 50px;
+      transition: all 0.3s;
+    }
+  }
+
+  .git-link {
+    filter: invert(1);
+
+    img {
+      width: 30px;
+      transition: all 0.3s;
+    }
+  }
+}
+
+main {
+  display: grid;
+  place-items: center;
+  height: 100%;
+
+  h2 {
+    animation: pulsate 2s infinite forwards;
+  }
 }
 
 .circle {
@@ -50,5 +121,15 @@ body {
   100% {
     opacity: 0;
     filter: blur(10px);
+  }
+}
+
+@keyframes pulsate {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
   }
 }
